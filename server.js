@@ -31,11 +31,11 @@ function BroadcastUpdate(id, action, data) {
 }
 
 wsServer.on('request', function (request) {
-	if (!originIsAllowed(request.origin)) {
-		request.reject();
-		console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
-		return;
-	}
+	// if (!originIsAllowed(request.origin)) {
+	// 	request.reject();
+	// 	console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
+	// 	return;
+	// }
 
 	var connection = request.accept('echo-protocol', request.origin);
 
