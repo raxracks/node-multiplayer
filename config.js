@@ -1,7 +1,13 @@
 let movement_limit = 2;
 
-module.exports.PopulateData = function(players, playerID) {
-	players[playerID]["pos"] = {x: 0, y: 0, z: 0};
+module.exports.PopulateData = function(playerID, PlayerManager) {
+	let player = PlayerManager.GetPlayer(playerID);
+	
+	player["pos"] = {x: 0, y: 0, z: 0};
+
+	PlayerManager.UpdatePlayer(playerID, player);
+
+	console.log(`[${new Date()}] Populated data of Player ${playerID}`);
 }
 
 module.exports.Actions = {
@@ -19,7 +25,7 @@ module.exports.Actions = {
 		player.pos.y = data.pos.y;
 		player.pos.z = data.pos.z;
 
-		PlayerManager.UpdatePlayer(id, player);
+		PlayerManager.UpdatePlayer(playerID, player);
 
 		return 1;
 	}

@@ -17,7 +17,7 @@ module.exports.PlayerManager = class {
         }
 
         this.PopulateData = function(id) {
-            Config.PopulateData(this.GetPlayers(), id);
+            Config.PopulateData(id, this);
         }
 
         this.GetPlayer = function(id) {

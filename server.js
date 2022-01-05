@@ -39,7 +39,7 @@ wsServer.on('request', function (request) {
 
 	var connection = request.accept('echo-protocol', request.origin);
 
-	console.log((new Date()) + ' Connection accepted.');
+	console.log(`[${new Date()}] Connection accepted.`);
 
 	PlayerManager.AddPlayer(request.key, connection);
 
