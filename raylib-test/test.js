@@ -2,6 +2,7 @@ const r = require('raylib');
 const WebSocketClient = require('websocket').client;
 const client = new WebSocketClient();
 const players = {};
+const packetDelay = 1; // in milliseconds
 let packet = {};
 let previousPacket = packet;
 let currentConnection = undefined;
@@ -136,13 +137,13 @@ client.on('connect', function (connection) {
 
     setInterval(keepAlive, 1000);
 
-    function SendPacket() {
+    function SendPacket() { // send packet when value of packet has changed and websocket is connected
         if(previousPacket !== packet && connection.connected) {
             connection.sendUTF(packet);
         }
     }
 
-    setInterval(SendPacket);
+    setInterval(SendPacket, packetDelay);
 });
 
 client.connect(`ws://localhost:8080/`, 'echo-protocol');

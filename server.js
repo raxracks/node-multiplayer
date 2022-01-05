@@ -1,9 +1,10 @@
 const WebSocketServer = require('websocket').server;
 const http = require('http');
 const player = require('./player.js');
-const anticheat = require('./anticheat.js');
-const PlayerManager = new player.PlayerManager();
-const AntiCheat = new anticheat.AntiCheat(PlayerManager);
+const actionSystem = require('./action-system.js');
+const Config = require('./config.js');
+const PlayerManager = new player.PlayerManager(Config);
+const ActionSystem = new actionSystem.ActionSystem(PlayerManager, Config);
 const port = 8080;
 
 const server = http.createServer(function (request, response) {
@@ -20,10 +21,6 @@ wsServer = new WebSocketServer({
 	httpServer: server,
 	autoAcceptConnections: false
 });
-
-function originIsAllowed(origin) {
-	return true;
-}
 
 function BroadcastUpdate(id, action, data) {
 	let players = PlayerManager.GetPlayers();
@@ -52,7 +49,7 @@ wsServer.on('request', function (request) {
 			let action = split[0];
 			let data = JSON.parse(split[1]);
 
-			if(AntiCheat.RequestAction(request.key, action, data) == 1) {
+			if(ActionSystem.RequestAction(request.key, action, data) == 1) {
 				BroadcastUpdate(request.key, action, data);
 			};
 		}

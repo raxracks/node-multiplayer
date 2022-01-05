@@ -1,5 +1,5 @@
 module.exports.PlayerManager = class {
-    constructor() {
+    constructor(Config) {
         this.players = {};
 
         this.AddPlayer = function(id, connection, type) {
@@ -17,8 +17,7 @@ module.exports.PlayerManager = class {
         }
 
         this.PopulateData = function(id) {
-            // implement player structure here
-            this.players[id]["pos"] = {x: 0, y: 0, z: 0};
+            Config.PopulateData(this.GetPlayers(), id);
         }
 
         this.GetPlayer = function(id) {
