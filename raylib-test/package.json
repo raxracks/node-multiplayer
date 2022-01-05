@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "raylib": "^0.8.1",
+    "websocket": "^1.0.34"
+  }
+}
