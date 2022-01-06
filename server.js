@@ -49,6 +49,8 @@ wsServer.on('request', function (request) {
 			let action = split[0];
 			let data = JSON.parse(split[1]);
 
+			console.log(message.utf8Data)
+
 			if(ActionSystem.RequestAction(request.key, action, data) == 1) {
 				BroadcastUpdate(request.key, action, data);
 			};

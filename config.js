@@ -1,9 +1,9 @@
-let movement_limit = 2;
+let movement_limit = 20000;
 
 module.exports.PopulateData = function(playerID, PlayerManager) {
 	let player = PlayerManager.GetPlayer(playerID);
 	
-	player["pos"] = {x: 0, y: 0, z: 0};
+	player["pos"] = {x: 0, y: 0};
 
 	PlayerManager.UpdatePlayer(playerID, player);
 
@@ -14,7 +14,7 @@ module.exports.Actions = {
 	"Move": function(playerID, ActionSystem, PlayerManager, data) {
 		let player = PlayerManager.GetPlayer(playerID);
 
-		if(Math.abs(player.pos.x - data.x) > movement_limit || Math.abs(player.pos.y - data.y) > movement_limit || Math.abs(player.pos.z - data.z) > movement_limit) {
+		if(Math.abs(player.pos.x - data.x) > movement_limit || Math.abs(player.pos.y - data.y) > movement_limit) {
 			console.log("Player moved too fast!");
 			ActionSystem.SendLocalAction(player.connection, playerID, "MoveClient", player.pos);
 			
