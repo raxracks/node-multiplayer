@@ -14,16 +14,16 @@ module.exports.Actions = {
 	"Move": function(playerID, ActionSystem, PlayerManager, data) {
 		let player = PlayerManager.GetPlayer(playerID);
 
-		if(Math.abs(player.pos.x - data.pos.x) > movement_limit || Math.abs(player.pos.y - data.pos.y) > movement_limit || Math.abs(player.pos.z - data.pos.z) > movement_limit) {
+		if(Math.abs(player.pos.x - data.x) > movement_limit || Math.abs(player.pos.y - data.y) > movement_limit || Math.abs(player.pos.z - data.z) > movement_limit) {
 			console.log("Player moved too fast!");
 			ActionSystem.SendLocalAction(player.connection, playerID, "MoveClient", player.pos);
 			
 			return 0;
 		}
 
-		player.pos.x = data.pos.x;
-		player.pos.y = data.pos.y;
-		player.pos.z = data.pos.z;
+		player.pos.x = data.x;
+		player.pos.y = data.y;
+		player.pos.z = data.z;
 
 		PlayerManager.UpdatePlayer(playerID, player);
 

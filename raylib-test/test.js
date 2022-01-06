@@ -34,7 +34,7 @@ let interval = setInterval(() => { // using intervals to prevent blocking thread
     //----------------------------------------------------------------------------------
     r.UpdateCamera(camera);                  // Update camera
 
-    packet = `Move | ${JSON.stringify({pos: {x: camera.position.x, y: camera.position.y, z: camera.position.z}})}`;
+    packet = `Move | ${JSON.stringify({x: camera.position.x, y: camera.position.y, z: camera.position.z})}`;
     //----------------------------------------------------------------------------------
 
     // Draw
@@ -53,7 +53,7 @@ let interval = setInterval(() => { // using intervals to prevent blocking thread
         r.DrawCubeWires(pos, 2, 2, 2, r.MAROON);
     });
 
-    r.DrawGrid(10, 1);
+    r.DrawGrid(1000, 1);
 
     r.EndMode3D();
 
@@ -109,15 +109,15 @@ client.on('connect', function (connection) {
                 case "Move":
                     if (!players.hasOwnProperty(id)) PopulatePlayerData(id);
 
-                    players[id].pos.x = data.pos.x;
-                    players[id].pos.y = data.pos.y;
-                    players[id].pos.z = data.pos.z;
+                    players[id].pos.x = data.x;
+                    players[id].pos.y = data.y;
+                    players[id].pos.z = data.z;
                     break;
 
                 case "MoveClient":
-                    camera.position.x = data.pos.x;
-                    camera.position.y = data.pos.y;
-                    camera.position.z = data.pos.z;
+                    camera.position.x = data.x;
+                    camera.position.y = data.y;
+                    camera.position.z = data.z;
 
                     break;
 
@@ -146,4 +146,4 @@ client.on('connect', function (connection) {
     setInterval(SendPacket, packetDelay);
 });
 
-client.connect(`ws://localhost:8080/`, 'echo-protocol');
+client.connect(`ws://192.168.1.72:8080/`, 'echo-protocol');
