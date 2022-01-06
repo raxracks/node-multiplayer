@@ -1,4 +1,4 @@
-let movement_limit = 20000;
+let movement_limit = 9999999;
 
 module.exports.PopulateData = function(playerID, PlayerManager) {
 	let player = PlayerManager.GetPlayer(playerID);
